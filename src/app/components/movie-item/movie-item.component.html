@@ -1,0 +1,24 @@
+<ng-container *ngIf="itemData">
+  <a class="movie-item" [routerLink]="'/movieDetails/'+ itemData.id">
+    <div class="movie-item-rating">
+      <i class="fa-solid fa-star star"></i>
+      <span>{{ itemData.vote_average }}</span
+      >/10
+    </div>
+
+    <div class="movie-item-image" *ngIf="itemData.backdrop_path ">
+      <img
+      [src]="'https://image.tmdb.org/t/p/w1280/'+itemData.backdrop_path"
+        alt={{itemData.title}}
+      />
+    </div>
+    <div class="movie-item-image" *ngIf="itemData.backdrop_path === null">
+      <img
+      src="assets/images/tvd.jpg"
+        alt={{itemData.title}}
+      />
+    </div>
+
+    <div class="movie-item-title">{{itemData.title}}</div>
+  </a>
+</ng-container>

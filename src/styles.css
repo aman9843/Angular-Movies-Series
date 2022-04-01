@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-size: 14px;
+  color: #fff;
+  background-color: #212121;
+}
+
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.container {
+ margin: 0.5rem;
+ padding: 0.5rem;
+}
