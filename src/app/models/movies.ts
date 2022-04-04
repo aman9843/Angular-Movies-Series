@@ -18,7 +18,8 @@ export interface Movies {
   revenue:number;
   runtime:number;
   status:string;
-  genres:Genres[];
+  genres:Genres[]
+
 }
 
 
@@ -45,6 +46,24 @@ export interface MoviesVideosDto {
 export interface MoviesVideo {
   site:string,
   key:string
+}
+
+
+
+export interface MoviesImages {
+
+  backdrops: {
+    file_path:string;
+  }[]
+
+}
+
+
+export interface MoviesCredits {
+  cast:{
+    name:string,
+    profile_path: string
+  }[]
 }
 
 

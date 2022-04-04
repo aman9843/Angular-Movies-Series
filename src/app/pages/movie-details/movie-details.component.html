@@ -1,82 +1,96 @@
 <ng-container *ngIf="movies">
-
   <app-slider [items]="[movies]" [isBanner]="true"></app-slider>
   <p-tabView>
     <p-tabPanel header="Overviews">
-       <div class="grid">
-         <div class="col-12 md:col-3 lg:col-3">
-           <img class="poster" [src]="'https://image.tmdb.org/t/p/w300/'+movies.poster_path" [alt]="movies.title">
-         </div>
-         <div class="col-12 md:col-9 lg:col-9">
-           <h2>Overviews</h2>
-           <p class="overviews">{{movies.overview}}</p>
+      <div class="grid">
+        <div class="col-12 md:col-3 lg:col-3">
+          <img
+            class="poster"
+            [src]="'https://image.tmdb.org/t/p/w300/' + movies.poster_path"
+            [alt]="movies.title"
+          />
+        </div>
+        <div class="col-12 md:col-9 lg:col-9">
+          <h2>Overviews</h2>
+          <p class="overviews">{{ movies.overview }}</p>
 
-           <div class="stat">
-             <div class="label">Release Date:</div>
-               <div class="value">
-                {{movies.release_date | date: "dd.MM.yyy"}}
-
-             </div>
-           </div>
-           <div class="stat">
-            <div class="label">Language:</div>
-              <div class="value">
-               {{movies.original_language | uppercase}}
-
+          <div class="stat">
+            <div class="label">Release Date:</div>
+            <div class="value">
+              {{ movies.release_date | date: "dd.MM.yyy" }}
             </div>
-
+          </div>
+          <div class="stat">
+            <div class="label">Language:</div>
+            <div class="value">
+              {{ movies.original_language | uppercase }}
+            </div>
           </div>
           <div class="stat">
             <div class="label">Revenue:</div>
-              <div class="value">
-               {{movies.revenue | currency}}
-
+            <div class="value">
+              {{ movies.revenue | currency }}
             </div>
-
           </div>
           <div class="stat">
             <div class="label">Runtime:</div>
-              <div class="value">
-               {{movies.runtime}}
-               min
-
+            <div class="value">
+              {{ movies.runtime }}
+              min
             </div>
-
           </div>
           <div class="stat">
             <div class="label">Status:</div>
-              <div class="value">
-               {{movies.status}}
-
-
+            <div class="value">
+              {{ movies.status }}
             </div>
-
           </div>
           <div class="stat">
             <div class="label">Genres:</div>
-              <div class="value" >
-                  <span *ngFor="let genre of movies.genres">
-                    {{genre.name}}
-
-                  </span>
-
-
+            <div class="value">
+              <span *ngFor="let genre of movies.genres">
+                {{ genre.name }}
+              </span>
             </div>
-
           </div>
-
-
-         </div>
-       </div>
+        </div>
+      </div>
     </p-tabPanel>
     <p-tabPanel header="Videos">
-       <pre>{{moviesVideos | json}}</pre>
+      <div class="grid">
+        <ng-container *ngFor="let movieVideos of moviesVideos">
+          <div class="col:12 md:col-4 lg:md-4">
+            <app-videos [key]="movieVideos.key" [site]="movieVideos.site">
+            </app-videos>
+          </div>
+        </ng-container>
+      </div>
     </p-tabPanel>
     <p-tabPanel header="Photos">
-        Content 3
+      <div class="grid">
+        <ng-container *ngFor="let movieImages of moviesImages?.backdrops">
+          <div class="col:12 md:col-4 lg:md-4">
+            <p-image
+              [src]="
+                'https://image.tmdb.org/t/p/w1280/' + movieImages.file_path
+              "
+              alt="Image"
+              width="100%"
+              [preview]="true"
+            ></p-image>
+          </div>
+        </ng-container>
+      </div>
     </p-tabPanel>
-</p-tabView>
+  </p-tabView>
+
+  <p-carousel *ngIf="moviesCredits" [value]="moviesCredits.cast"  [numVisible]="5" [numScroll]="5">
+    <ng-template let-actor pTemplate="item">
+       <div class="actor">
+         <img [src]="'https://image.tmdb.org/t/p/w300/'+actor.profile_path " alt="">
+         <span>{{actor.name}}</span>
+       </div>
+    </ng-template>
+</p-carousel>
 
 </ng-container>
-
-

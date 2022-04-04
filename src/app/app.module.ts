@@ -18,6 +18,9 @@ import { SeriesItemComponent } from './components/series-item/series-item.compon
 import {PaginatorModule} from 'primeng/paginator';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 import {TabViewModule} from 'primeng/tabview';
+import { VideosComponent } from './components/videos/videos.component';
+import {ImageModule} from 'primeng/image';
+import {CarouselModule} from 'primeng/carousel';
 
 
 @NgModule({
@@ -34,10 +37,11 @@ import {TabViewModule} from 'primeng/tabview';
     MovieItemComponent,
     SeriesItemComponent,
     MovieDetailsComponent,
- 
+    VideosComponent
+
   ],
   imports: [BrowserModule,BrowserAnimationsModule,
-    AppRoutingModule, HttpClientModule,PaginatorModule,TabViewModule],
+    AppRoutingModule, HttpClientModule,PaginatorModule,TabViewModule,ImageModule,CarouselModule],
   providers: [],
   bootstrap: [AppComponent],
 })

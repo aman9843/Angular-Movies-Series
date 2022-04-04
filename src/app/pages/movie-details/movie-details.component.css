@@ -37,3 +37,20 @@
   color:#FFD54F
 
 }
+
+
+.actor {
+  padding: 10px;
+
+}
+
+
+.actor img {
+  width: 100%;
+}
+
+.actor img span {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
