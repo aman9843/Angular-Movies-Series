@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Movies } from 'src/app/models/movies';
+import { Movies, MoviesVideo } from 'src/app/models/movies';
 import { MoviesService } from '../../services/movies.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { MoviesService } from '../../services/movies.service';
 export class MovieDetailsComponent implements OnInit {
 
   movies : Movies | null = null;
+  moviesVideos: MoviesVideo[] = [];
 
   constructor(private route: ActivatedRoute, private moviesService :MoviesService) { }
 
@@ -18,6 +19,7 @@ export class MovieDetailsComponent implements OnInit {
 
     this.route.params.subscribe(({id}) => {
           this.moviesDetails(id)
+          this.getmoviesVideos(id)
     })
   }
 
@@ -29,4 +31,17 @@ export class MovieDetailsComponent implements OnInit {
 
 
 
-}}
+
+
+}
+
+getmoviesVideos(id: string) {
+  this.moviesService.moviesDetailsVideos(id).subscribe((moviesVideosData) => {
+       this.moviesVideos = moviesVideosData;
+       console.log(this.moviesVideos)
+  })
+
+}
+
+
+}

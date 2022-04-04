@@ -1,0 +1,39 @@
+:host ::ng-deep .p-tabview-nav  {
+  justify-content:center ;
+
+}
+
+:host ::ng-deep  .p-component * {
+  padding: 4px 4px 0 0;
+}
+
+:host ::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  background-color: #212121;
+}
+:host ::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  background-color: #212121;
+}
+
+.poster {
+  max-width: 100%;
+}
+
+.overviews {
+  line-height: 1.5;
+}
+
+.stat {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.label {
+  width: 150px;
+  font-weight: bold;
+}
+
+.value {
+
+  color:#FFD54F
+
+}
