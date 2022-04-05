@@ -1,4 +1,7 @@
-<div class="slider">
+
+
+
+<div class="slider" *ngIf="items">
   <ng-container *ngFor="let item of items; let i = index">
     <div class="slide" *ngIf="i == currentSlideIndex" @slideFade>
       <div class="slide-bg">
@@ -25,3 +28,5 @@
     </div>
   </ng-container>
 </div>
+
+

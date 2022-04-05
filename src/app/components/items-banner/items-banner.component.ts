@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Tv } from 'src/app/models/tv';
 import { Movies } from '../../models/movies';
 
 @Component({
@@ -10,7 +11,7 @@ export class ItemsBannerComponent  {
 
   @Input() items: Movies[] = [];
   @Input() title: String =""
-  @Input() seriesItems: Movies[] = [];
+  @Input() seriesItems: Tv[] = [];
   @Input() name: String =""
 
 

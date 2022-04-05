@@ -1,12 +1,12 @@
+import { Component, OnInit } from '@angular/core';
+import { Input } from '@angular/core';
+import { Tv } from 'src/app/models/tv';
 import { trigger,style,state, transition, animate } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
-import { Movies } from 'src/app/models/movies';
-
 
 @Component({
-  selector: 'app-slider',
-  templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.css'],
+  selector: 'app-sliders',
+  templateUrl: './sliders.component.html',
+  styleUrls: ['./sliders.component.css'],
   animations: [
     trigger('slideFade',[
       state('void', style({opacity:0})),
@@ -16,8 +16,8 @@ import { Movies } from 'src/app/models/movies';
     ])
   ]
 })
-export class SliderComponent implements OnInit {
-  @Input() items: Movies[] = [];
+export class SlidersComponent implements OnInit {
+  @Input() item: Tv[] = [];
   @Input() isBanner: boolean = false
   currentSlideIndex : number = 0;
 
@@ -27,7 +27,7 @@ export class SliderComponent implements OnInit {
 
     if(!this.isBanner) {
       setInterval(() =>{
-        this.currentSlideIndex == ++this.currentSlideIndex % this.items.length;
+        this.currentSlideIndex == ++this.currentSlideIndex % this.item.length;
 
       },5000)
 
@@ -37,3 +37,5 @@ export class SliderComponent implements OnInit {
   }
 
 }
+
+

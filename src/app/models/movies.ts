@@ -17,7 +17,13 @@ export interface Movies {
   vote_count: number;
   revenue:number;
   runtime:number;
+  air_date:string;
+  first_air_date:string;
+  last_air_date:string;
+  number_of_episodes:string;
+  number_of_seasons:string;
   status:string;
+  episode_run_time:number
   genres:Genres[]
 
 }

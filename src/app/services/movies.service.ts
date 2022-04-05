@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Movies, MoviesDto, MoviesImages } from '../models/movies';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { TvDto } from '../models/tv';
+import { SeriesVideosDto, Tv, TvDto } from '../models/tv';
 import { MoviesVideosDto } from '../models/movies';
 import { MoviesCredits } from '../models/movies';
 import { GenresDto } from '../models/genres';
+import { SeriesCredits,SeriesImages } from '../models/tv';
 @Injectable({
   providedIn: 'root',
 })
@@ -36,14 +37,31 @@ export class MoviesService {
       );
   }
 
-  searchMovies(page: number) {
+  searchMovies(page: number, searchValue?: string) {
+    const uri = searchValue ? '/search/movie' : '/movie/popular' ;
     return this.http
       .get<MoviesDto>(
-        `${this.baseUrl}/movie/popular?page=${page}&api_key=${this.api}`
+        `${this.baseUrl}${uri}?page=${page}&query=${searchValue}&api_key=${this.api}`
       )
       .pipe(
         switchMap((res) => {
           return of(res.results);
+
+        })
+      );
+  }
+
+
+  searchSeries(page: number, searchValue?: string) {
+    const uri = searchValue ? '/search/tv' : '/tv/popular' ;
+    return this.http
+      .get<MoviesDto>(
+        `${this.baseUrl}${uri}?page=${page}&query=${searchValue}&api_key=${this.api}`
+      )
+      .pipe(
+        switchMap((res) => {
+          return of(res.results);
+
         })
       );
   }
@@ -55,12 +73,26 @@ export class MoviesService {
 
   }
 
+  seriesDetails(id:string) {
+    return this.http
+      .get<Tv>(`${this.baseUrl}/tv/${id}?api_key=${this.api}`)
+  }
+
   moviesCredits(id: string) {
     return this.http
       .get<MoviesCredits>(`${this.baseUrl}/movie/${id}/credits?api_key=${this.api}`)
 
 
   }
+
+
+  seriesCredits(id: string) {
+    return this.http
+      .get<SeriesCredits>(`${this.baseUrl}/tv/${id}/credits?api_key=${this.api}`)
+
+
+  }
+
 
 
   moviesDetailsVideos(id: string) {
@@ -76,6 +108,19 @@ export class MoviesService {
     }
 
 
+    seriesDetailsVideos(id: string) {
+      return this.http
+        .get<SeriesVideosDto>(`${this.baseUrl}/tv/${id}/videos?api_key=${this.api}`)
+        .pipe(
+          switchMap((res) => {
+            return of(res.results)
+          })
+
+
+        );
+      }
+
+
     moviesGenres() {
       return this.http
         .get<GenresDto>(`${this.baseUrl}/genre/movie/list?api_key=${this.api}`)
@@ -88,10 +133,35 @@ export class MoviesService {
         );
       }
 
+      seriesGenres() {
+        return this.http
+          .get<GenresDto>(`${this.baseUrl}/genre/tv/list?api_key=${this.api}`)
+          .pipe(
+            switchMap((res) => {
+              return of(res.genres)
+            })
 
-    moviesGenresById(genreId:string) {
+
+          );
+        }
+
+
+      getMoviesById(genreId:string,pageNumber:number) {
       return this.http
-        .get<MoviesDto>(`${this.baseUrl}/discover/movie?with_genres=${genreId}&api_key=${this.api}`)
+        .get<MoviesDto>(`${this.baseUrl}/discover/movie?with_genres=${genreId}&page=${pageNumber}&api_key=${this.api}`)
+        .pipe(
+          switchMap((res) => {
+            return of(res.results)
+          })
+
+
+        );
+
+    }
+
+    getSeriesById(genreId:string,pageNumber:number) {
+      return this.http
+        .get<TvDto>(`${this.baseUrl}/discover/tv?with_genres=${genreId}&page=${pageNumber}&api_key=${this.api}`)
         .pipe(
           switchMap((res) => {
             return of(res.results)
@@ -105,6 +175,13 @@ export class MoviesService {
     moviesImages(id: string) {
       return this.http
         .get<MoviesImages>(`${this.baseUrl}/movie/${id}/images?api_key=${this.api}`)
+
+
+    }
+
+    seriesImages(id: string) {
+      return this.http
+        .get<SeriesImages>(`${this.baseUrl}/tv/${id}/images?api_key=${this.api}`)
 
 
     }

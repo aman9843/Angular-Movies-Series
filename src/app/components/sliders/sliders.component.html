@@ -1,0 +1,30 @@
+<!-- Series -->
+<div class="slider">
+  <ng-container  *ngFor="let items of item; let i = index">
+    <div class="slide" *ngIf="i == currentSlideIndex" @slideFade>
+      <div class="slide-bg">
+        <img
+          class="slide-bg-image"
+          [src]="'https://image.tmdb.org/t/p/w780/' + items.backdrop_path"
+          [alt]="items.title"
+        />
+      </div>
+      <div class="slide-pane">
+
+        <h2 class="name">{{ items.name }} - {{ i }}</h2>
+        <div class="meta">
+          <div class="info">
+            <span class="rating"><i class="fa-solid fa-star star"></i></span
+            ><span class="rating-value">{{ items.vote_average }}</span
+            ><span>/10</span>
+            <span>{{ items.vote_count }}</span>
+            <span>{{ items.first_air_date | date: 'yyyy'}}</span>
+            <span>{{ items.last_air_date | date: 'yyyy'}}</span>
+          </div>
+        </div>
+        <div class="desc mt-6">{{ items.overview }}</div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
